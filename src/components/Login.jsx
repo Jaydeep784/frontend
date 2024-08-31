@@ -27,7 +27,7 @@ const Login = () => {
     }
 
     try {
-        const res = await axios.post("https://marketplace-backend-nwiw.onrender.com/users/login", user);
+        const res = await axios.post("backend-six-inky-58.vercel.app/users/login", user);
         if (res.status === 201) {
             setUser(prev => ({ ...prev, name: res.data.user.name }));
         }
