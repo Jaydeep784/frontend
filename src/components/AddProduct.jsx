@@ -21,7 +21,7 @@ const AddProduct = () => {
     )
       return alert("Enter data in all fields");
     axios
-      .post("https://marketplace-backend-nwiw.onrender.com/productDetails", productDetail)
+      .post("backend-six-inky-58.vercel.app/productDetails", productDetail)
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };
