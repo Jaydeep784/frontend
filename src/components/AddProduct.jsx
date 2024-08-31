@@ -21,7 +21,7 @@ const AddProduct = () => {
     )
       return alert("Enter data in all fields");
     axios
-      .post("backend-six-inky-58.vercel.app/productDetails", productDetail)
+      .post("https://backend-1bqu.onrender.com//productDetails", productDetail)
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };
