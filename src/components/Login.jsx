@@ -27,7 +27,8 @@ const Login = () => {
     }
 
     try {
-        const res = await axios.post("https://marketplace-backend-nwiw.onrender.com/users/login", user);
+        // const res = await axios.post("http://localhost:3001/users/login", user);
+        const res = await axios.post("https://backend-1bqu.onrender.com/users/login", user);
         if (res.status === 201) {
             setUser(prev => ({ ...prev, name: res.data.user.name }));
         }

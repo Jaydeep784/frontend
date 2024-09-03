@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const Navbar = () => {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -16,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-300">
+    <div className="navbar bg-slate-900">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -43,7 +44,7 @@ const Navbar = () => {
               <a className="hover:text-yellow-300">Categories</a>
             </li>
             <li>
-              <a className="hover:text-yellow-300">Products</a>
+              <a className="hover:text-yellow-300" href="/products">Products</a>
             </li>
             <li>
               <a className="hover:text-yellow-300" href="/add-product">
@@ -62,7 +63,7 @@ const Navbar = () => {
             <a className="hover:text-yellow-300">Categories</a>
           </li>
           <li>
-            <a className="hover:text-yellow-300">Products</a>
+            <a href="/products" className="hover:text-yellow-300">Products</a>
           </li>
           <li>
             <a className="hover:text-yellow-300" href="/add-product">

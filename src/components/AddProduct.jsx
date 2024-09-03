@@ -1,31 +1,59 @@
+// https://backend-1bqu.onrender.com
+
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 const AddProduct = () => {
   const [productDetail, setProductDetail] = useState({
     sellerName: "",
     mobile: "",
-    productImg: "",
+    productImg: null, // Update to handle file object
     productName: "",
     productDet: "",
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (
-      productDetail.sellerName == "" ||
-      productDetail.mobile == "" ||
-      productDetail.productImg == "" ||
-      productDetail.productName == "" ||
-      productDetail.productDet == ""
-    )
-      return alert("Enter data in all fields");
-    axios
-      .post("https://marketplace-backend-nwiw.onrender.com/productDetails", productDetail)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+  const handleFileChange = (e) => {
+    setProductDetail((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.files[0], // Store the file object
+    }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Create FormData object
+    const formData = new FormData();
+    formData.append("sellerName", productDetail.sellerName);
+    formData.append("mobile", productDetail.mobile);
+    formData.append("productName", productDetail.productName);
+    formData.append("productDet", productDetail.productDet);
+    formData.append("productImg", productDetail.productImg); // Append file object
+
+    try {
+      // const response = await axios.post(
+      //   "http://localhost:3001/productDetails",
+        const response = await axios.post(
+          "https://backend-1bqu.onrender.com/productDetails",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important for file uploads
+          },
+        }
+      );
+      console.log("Response:", response.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+    setProductDetail({
+      sellerName: "",
+      mobile: "",
+      productImg: null, // Update to handle file object
+      productName: "",
+      productDet: "",
+    });
+  };
   return (
     <>
       <div className="min-h-screen bg-gray-50 flex flex-col md:justify-center py-16 sm:px-6 lg:px-8">
@@ -42,7 +70,11 @@ const AddProduct = () => {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form method="POST" onSubmit={handleSubmit}>
+            <form
+              method="POST"
+              onSubmit={handleSubmit}
+              encType="multipart/form-data"
+            >
               <div className="">
                 <label
                   htmlFor="email"
@@ -55,6 +87,7 @@ const AddProduct = () => {
                     className="appearance-none bg-white block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                     type="text"
                     name="sellerName"
+                    value={productDetail.sellerName}
                     onChange={(e) =>
                       setProductDetail((prev) => ({
                         ...prev,
@@ -77,6 +110,7 @@ const AddProduct = () => {
                     className="appearance-none bg-white block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                     type="tel"
                     name="mobile"
+                    value={productDetail.mobile}
                     onChange={(e) =>
                       setProductDetail((prev) => ({
                         ...prev,
@@ -99,12 +133,8 @@ const AddProduct = () => {
                     className="appearance-none bg-white block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                     name="productImg"
                     type="file"
-                    onChange={(e) =>
-                      setProductDetail((prev) => ({
-                        ...prev,
-                        [e.target.name]: e.target.value,
-                      }))
-                    }
+                    // value={productDetail.productImg}
+                    onChange={handleFileChange}
                   />
                 </div>
               </div>
@@ -120,6 +150,7 @@ const AddProduct = () => {
                     className="appearance-none bg-white block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                     name="productName"
                     type="text"
+                    value={productDetail.productName}
                     onChange={(e) =>
                       setProductDetail((prev) => ({
                         ...prev,
@@ -140,6 +171,7 @@ const AddProduct = () => {
                   <textarea
                     className="appearance-none bg-white block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                     name="productDet"
+                    value={productDetail.productDet}
                     onChange={(e) =>
                       setProductDetail((prev) => ({
                         ...prev,

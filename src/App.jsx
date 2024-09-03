@@ -5,6 +5,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Categories from "./components/Categories";
+import Products from "./components/Products";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/users/login" element={<Login />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/categories" element={<Categories/>}/>
+        <Route path="/products" element={<Products/>}/>
       </Routes>
     </BrowserRouter>
   );

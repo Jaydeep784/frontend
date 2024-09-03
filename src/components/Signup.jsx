@@ -17,7 +17,8 @@ const Signup = () => {
         console.log(user);
         if(user.name == "" || user.email == "" || user.password == "") return alert("Enter all the details");
         if(user.password.length < 6) return alert("Password length must be greater than 6");
-        axios.post('https://marketplace-backend-nwiw.onrender.com/users/signup', user).then((res) => console.log(res)).catch((e) => console.log(e));
+        // axios.post('http://localhost:3001/users/signup', user).then((res) => console.log(res)).catch((e) => console.log(e));
+        axios.post('https://backend-1bqu.onrender.com/users/signup', user).then((res) => console.log(res)).catch((e) => console.log(e));
         navigate("/users/login");
     }
 

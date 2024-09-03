@@ -6,8 +6,8 @@ import img4 from "../assets/img4.jpg";
 
 const Carousel = () => {
   return (
-    <div className="carousel w-full m-0">
-      <div id="slide1" className="carousel-item relative w-full">
+    <div className="carousel w-full z-10 -mt-1">
+      <div id="slide1" className="carousel-item relative w-full m-0">
         <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="w-full h-52 md:h-96" />
         <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between"></div>
       </div>
@@ -19,7 +19,7 @@ const Carousel = () => {
         <img src="https://images.pexels.com/photos/577769/pexels-photo-577769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="w-full h-52 md:h-96" />
         <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between"></div>
       </div>
-      <div id="slide4" className="carousel-item relative w-full">
+      <div id="slide4" className="carousel-item relative w-full m-0">
         <img src="https://images.pexels.com/photos/270288/pexels-photo-270288.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="w-full h-52 md:h-96" />
         <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between"></div>
       </div>
