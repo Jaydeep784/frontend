@@ -27,10 +27,6 @@ const Login = () => {
     }
 
     try {
-<<<<<<< HEAD
-        // const res = await axios.post("http://localhost:3001/users/login", user);
-=======
->>>>>>> 6421e359473dd5140dc6fa8e8f6cc60c31b1d9c3
         const res = await axios.post("https://backend-1bqu.onrender.com/users/login", user);
         if (res.status === 201) {
             setUser(prev => ({ ...prev, name: res.data.user.name }));

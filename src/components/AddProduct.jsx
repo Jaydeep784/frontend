@@ -12,28 +12,11 @@ const AddProduct = () => {
     productDet: "",
   });
 
-<<<<<<< HEAD
   const handleFileChange = (e) => {
     setProductDetail((prev) => ({
       ...prev,
       [e.target.name]: e.target.files[0], // Store the file object
     }));
-=======
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (
-      productDetail.sellerName == "" ||
-      productDetail.mobile == "" ||
-      productDetail.productImg == "" ||
-      productDetail.productName == "" ||
-      productDetail.productDet == ""
-    )
-      return alert("Enter data in all fields");
-    axios
-      .post("https://backend-1bqu.onrender.com/productDetails", productDetail)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
->>>>>>> 6421e359473dd5140dc6fa8e8f6cc60c31b1d9c3
   };
 
   const handleSubmit = async (e) => {
@@ -48,8 +31,6 @@ const AddProduct = () => {
     formData.append("productImg", productDetail.productImg); // Append file object
 
     try {
-      // const response = await axios.post(
-      //   "http://localhost:3001/productDetails",
         const response = await axios.post(
           "https://backend-1bqu.onrender.com/productDetails",
         formData,
