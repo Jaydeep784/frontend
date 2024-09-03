@@ -13,7 +13,7 @@ const Products = () => {
         productName: res.productName,
         sellerName: res.sellerName,
         desc: res.productDet,
-        image: "http://localhost:3001/Images/" + res.productImg,
+        image: "https://backend-1bqu.onrender.com/Images/" + res.productImg,
         mobile: res.mobile,
       }));
       
