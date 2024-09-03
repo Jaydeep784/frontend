@@ -6,7 +6,7 @@ const Products = () => {
 
   useEffect(() => {
     const getAllProducts = async () => {
-      const res = await axios.get("http://localhost:3001/getProducts");
+      const res = await axios.get("https://backend-1bqu.onrender.com/getProducts");
       const resArray = res.data.result;
 
       const newProducts = resArray.map(res => ({
