@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Navbar2 from './Navbar2'
 
 const Login = () => {
-
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -13,37 +14,37 @@ const Login = () => {
     password: "",
   });
 
-  const [login, setLogin] = useState(false);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (user.email === "" || user.password === "") {
-        return alert("Enter all the details");
-    }
-
-    if (user.password.length < 6) {
-        return alert("Password length must be greater than 6");
+      return toast.error("Enter all the details");
     }
 
     try {
-        const res = await axios.post("https://backend-1bqu.onrender.com/users/login", user);
-        if (res.status === 201) {
-            setUser(prev => ({ ...prev, name: res.data.user.name }));
-        }
+      axios
+        .post("https://backend-1bqu.onrender.com/users/login", user)
+        .then((res) => {
+          
+          if (res.status === 201) {
+            toast.success(res.data.msg);
+            setUser((prev) => ({ ...prev, name: res.data.user.name }));
+          }
+        })
+        .catch((e) => toast.error(e.response.data.msg));
+      // const res = await axios.post("http://localhost:3001/users/login", user);
+      
     } catch (e) {
-        console.log(e);
+      console.log(e);
     }
-};
+  };
 
-useEffect(() => {
+  useEffect(() => {
     if (user.name) {
-        localStorage.setItem("users", JSON.stringify(user.name));
-        setLogin(true);
-        navigate("/")
+      localStorage.setItem("users", JSON.stringify(user.name));
+      navigate("/");
     }
-}, [user.name]);
-
+  }, [user.name]);
 
   // const handleSubmit = async (e) => {
   //   setLogin(false);
@@ -90,14 +91,16 @@ useEffect(() => {
   // };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col pt-16 md:justify-center sm:px-6 lg:px-8">
+    <div className="dark:bg-slate-950">
+      <Navbar2 />
+      <div className="dark:bg-slate-950  dark:border-t min-h-screen bg-gray-50 flex flex-col py-8 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
           className="mx-auto h-10 w-auto"
           src="https://www.svgrepo.com/show/301692/login.svg"
           alt="Workflow"
         />
-        <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+        <h2 className="dark:text-white mt-2 text-center text-3xl leading-9 font-extrabold text-gray-900">
           Login to your account
         </h2>
         <p className="mt-2 text-center text-sm leading-5 text-gray-500 max-w">
@@ -111,13 +114,13 @@ useEffect(() => {
           </a>
         </p>
       </div>
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form method="POST" onSubmit={handleSubmit}>
+      <div className="dark:bg-slate-950 border-white mt-4 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="dark:bg-slate-950 border-white bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <form method="POST" onSubmit={handleSubmit} >
             <div className="">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-5 text-gray-700"
+                className="dark:text-white block text-sm font-medium leading-5 text-black"
               >
                 Email address
               </label>
@@ -134,14 +137,14 @@ useEffect(() => {
                       [e.target.name]: e.target.value,
                     }))
                   }
-                  className="appearance-none bg-white block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                  className="appearance-none bg-white block w-full text-black px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                 />
               </div>
             </div>
             <div className="mt-6">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-5 text-gray-700"
+                className="dark:text-white block text-sm font-medium leading-5 text-black"
               >
                 Password
               </label>
@@ -157,7 +160,7 @@ useEffect(() => {
                       [e.target.name]: e.target.value,
                     }))
                   }
-                  className="bg-white appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                  className="bg-white appearance-none block text-black w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                 />
               </div>
             </div>
@@ -174,6 +177,8 @@ useEffect(() => {
           </form>
         </div>
       </div>
+      <ToastContainer />
+    </div>
     </div>
   );
 };

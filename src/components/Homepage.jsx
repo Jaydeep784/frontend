@@ -6,6 +6,7 @@ import Categories from './Categories'
 import Products from './Products'
 
 const Homepage = () => {
+
   return (
     <div className='bg-gray-300 min-h-screen flex flex-col m-0'>
       <Navbar />
