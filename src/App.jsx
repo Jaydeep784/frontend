@@ -9,12 +9,12 @@ import Products from "./components/Products";
 import { useEffect } from "react";
 
 function App() {
-  var isLoggedin = false;
+  // var isLoggedin = false;
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("users"));
-    if (user !== null) isLoggedin = true;
-  });
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem("users"));
+  //   if (user !== null) isLoggedin = true;
+  // });
 
   return (
     <BrowserRouter>
@@ -22,7 +22,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/users/signup" element={<Signup />} />
         <Route path="/users/login" element={<Login />} />
-        <Route path="/add-product" element={isLoggedin ? <AddProduct /> : <Login />} />
+        <Route path="/add-product" element={<AddProduct />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/products" element={<Products />} />
       </Routes>
